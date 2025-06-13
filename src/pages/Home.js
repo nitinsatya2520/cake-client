@@ -35,17 +35,20 @@ const Home = () => {
 
       {/* Product List */}
       <h2>🧁 Available Products</h2>
-      <div className="product-grid">
-        {products.map(product => (
-          <div key={product.id} className="product-card">
-            <img src={product.image_url} alt={product.name} />
-            <h4>{product.name}</h4>
-            <p>₹{product.price}</p>
-            <p>{product.description}</p>
-            <button>Add to Cart</button>
-          </div>
-        ))}
+<div className="carousel-wrapper">
+  <div className="carousel-track">
+    {products.map(product => (
+      <div key={product.id} className="product-card-3d">
+        <img src={product.image_url} alt={product.name} />
+        <h4>{product.name}</h4>
+        <p>₹{product.price}</p>
+        <p>{product.description}</p>
+        <button>Add to Cart</button>
       </div>
+    ))}
+  </div>
+</div>
+
 
       {/* Testimonials */}
       <section className="testimonials">
