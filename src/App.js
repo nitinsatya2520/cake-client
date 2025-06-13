@@ -7,6 +7,7 @@ import Cart from "./pages/Cart";
 import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import { CartProvider } from "./context/CartContext"; // ✅ Import your CartProvider
+import ThankYouPage from "./pages/ThankYouPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/thank-you" element={<ThankYouPage />} />
         </Routes>
       </Router>
     </CartProvider>
