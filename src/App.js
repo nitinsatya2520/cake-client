@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import { CartProvider } from "./context/CartContext"; // ✅ Import your CartProvider
 import ThankYouPage from "./pages/ThankYouPage";
+import Contact from "./pages/Contact";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/thank-you" element={<ThankYouPage />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </Router>
     </CartProvider>

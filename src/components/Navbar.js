@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import "./Navbar.css"; // ✅ Import CSS
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn") === "true");
   const navigate = useNavigate();
 
-  // Sync isLoggedIn state with localStorage changes
   useEffect(() => {
     const syncLoginStatus = () => {
       setIsLoggedIn(localStorage.getItem("isLoggedIn") === "true");
     };
-
     window.addEventListener("storage", syncLoginStatus);
     return () => window.removeEventListener("storage", syncLoginStatus);
   }, []);
 
-  // Optional: force check on every render
   useEffect(() => {
     setIsLoggedIn(localStorage.getItem("isLoggedIn") === "true");
   }, [localStorage.getItem("isLoggedIn")]);
@@ -28,67 +26,30 @@ const Navbar = () => {
   };
 
   return (
-    <nav style={styles.navbar}>
-      <div style={styles.logo}>🍰 Cask Bakery</div>
+    <nav className="navbar">
+      <div className="navbar-brand">
+  <img src="/logo.png" alt="KNS Bakery" className="navbar-logo" />
+  <span className="navbar-title">KNS Bakery</span>
+</div>
 
-      <div style={styles.links}>
-        <Link to="/" style={styles.link}>Home</Link>
-        <Link to="/products" style={styles.link}>Products</Link>
-        <Link to="/cart" style={styles.link}>Cart</Link>
+      <div className="navbar-links">
+        <Link to="/" className="navbar-link">Home</Link>
+        <Link to="/products" className="navbar-link">Products</Link>
+        <Link to="/cart" className="navbar-link">Cart</Link>
+        <Link to="/contact" className="navbar-link">Contact</Link>
       </div>
-
-      <div style={styles.authSection}>
+      <div className="navbar-auth">
         {isLoggedIn ? (
-          <button onClick={handleLogout} style={styles.authButton}>Logout</button>
+          <button onClick={handleLogout}>Logout</button>
         ) : (
           <>
-            <Link to="/login" style={styles.link}>Login</Link>
-            <Link to="/register" style={styles.link}>Register</Link>
+            <Link to="/login" className="navbar-link">Login</Link>
+            <Link to="/register" className="navbar-link">Register</Link>
           </>
         )}
       </div>
     </nav>
   );
-};
-
-const styles = {
-  navbar: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: "#6200ea",
-    padding: "10px 20px",
-    color: "white",
-    position: "sticky",
-    top: 0,
-    zIndex: 999,
-  },
-  logo: {
-    fontSize: "20px",
-    fontWeight: "bold",
-  },
-  links: {
-    display: "flex",
-    gap: "15px",
-  },
-  link: {
-    color: "white",
-    textDecoration: "none",
-    fontWeight: 500,
-    padding: "6px 8px",
-  },
-  authSection: {
-    display: "flex",
-    gap: "10px",
-  },
-  authButton: {
-    backgroundColor: "transparent",
-    border: "1px solid white",
-    color: "white",
-    padding: "6px 10px",
-    borderRadius: "4px",
-    cursor: "pointer",
-  },
 };
 
 export default Navbar;

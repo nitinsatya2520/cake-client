@@ -1,55 +1,89 @@
 import React, { useEffect, useState } from "react";
-import { useCart } from "../context/CartContext"; // ✅ import useCart
+import { useCart } from "../context/CartContext";
+import "./Products.css";
 
 function Products() {
   const [products, setProducts] = useState([]);
-  const { addToCart } = useCart(); // ✅ get addToCart function from context
+  const [filtered, setFiltered] = useState([]);
+  const [search, setSearch] = useState("");
+  const [sortOption, setSortOption] = useState("");
+  const { addToCart } = useCart();
 
   useEffect(() => {
     fetch("https://cask-server.onrender.com/api/products")
       .then((res) => res.json())
-      .then((data) => setProducts(data))
+      .then((data) => {
+        setProducts(data);
+        setFiltered(data);
+      })
       .catch((err) => console.error("Error fetching products:", err));
   }, []);
 
+  useEffect(() => {
+    let temp = [...products];
+
+    // Search Filter
+    if (search.trim()) {
+      temp = temp.filter((p) =>
+        p.name.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+
+    // Sort
+    if (sortOption === "price-asc") {
+      temp.sort((a, b) => a.price - b.price);
+    } else if (sortOption === "price-desc") {
+      temp.sort((a, b) => b.price - a.price);
+    } else if (sortOption === "name") {
+      temp.sort((a, b) => a.name.localeCompare(b.name));
+    }
+
+    setFiltered(temp);
+  }, [search, sortOption, products]);
+
   return (
-    <div style={{ padding: "40px", backgroundColor: "#f9f9f9" }}>
-      <h2 style={{ textAlign: "center", marginBottom: "30px", color: "#333" }}>Our Products</h2>
-      {products.length === 0 ? (
-        <p style={{ textAlign: "center" }}>Loading...</p>
+    <div className="products-container">
+      <h2 className="products-title">🧁 Our Products</h2>
+
+      {/* 🔍 Search + Sort */}
+      <div className="search-sort-bar">
+        <input
+          type="text"
+          placeholder="Search products..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="search-input"
+        />
+        <select
+          value={sortOption}
+          onChange={(e) => setSortOption(e.target.value)}
+          className="sort-select"
+        >
+          <option value="">Sort By</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="name">Name A–Z</option>
+        </select>
+      </div>
+
+      {filtered.length === 0 ? (
+        <p style={{ textAlign: "center" }}>No products found.</p>
       ) : (
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "30px" }}>
-          {products.map((product) => (
-            <div
-              key={product.id}
-              style={{
-                backgroundColor: "#fff",
-                borderRadius: "12px",
-                boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-                overflow: "hidden",
-                transition: "transform 0.2s",
-              }}
-            >
+        <div className="products-grid">
+          {filtered.map((product) => (
+            <div className="product-card" key={product.id}>
               <img
                 src={product.image_url}
                 alt={product.name}
-                style={{ width: "100%", height: "180px", objectFit: "cover" }}
+                className="product-image"
               />
-              <div style={{ padding: "15px" }}>
-                <h3 style={{ margin: "0 0 10px" }}>{product.name}</h3>
-                <p style={{ fontSize: "14px", color: "#666" }}>{product.description}</p>
-                <p style={{ fontWeight: "bold", margin: "10px 0" }}>₹{product.price}</p>
+              <div className="product-details">
+                <h3>{product.name}</h3>
+                <p>{product.description}</p>
+                <p className="product-price">₹{product.price}</p>
                 <button
-                  onClick={() => addToCart(product)} // ✅ call addToCart here
-                  style={{
-                    padding: "8px 16px",
-                    backgroundColor: "#6200ea",
-                    color: "#fff",
-                    border: "none",
-                    borderRadius: "5px",
-                    cursor: "pointer",
-                    width: "100%",
-                  }}
+                  onClick={() => addToCart(product)}
+                  className="product-button"
                 >
                   Add to Cart
                 </button>

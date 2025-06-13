@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./Register.css"; // Import CSS
 
 const Register = () => {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
@@ -21,9 +22,9 @@ const Register = () => {
   };
 
   return (
-    <div style={formContainer}>
-      <form onSubmit={handleSubmit} style={formStyle}>
-        <h2 style={formHeading}>Register</h2>
+    <div className="register-container">
+      <form onSubmit={handleSubmit} className="register-form">
+        <h2>Register</h2>
         <input
           name="name"
           type="text"
@@ -31,7 +32,6 @@ const Register = () => {
           value={form.name}
           onChange={handleChange}
           required
-          style={inputStyle}
         />
         <input
           name="email"
@@ -40,7 +40,6 @@ const Register = () => {
           value={form.email}
           onChange={handleChange}
           required
-          style={inputStyle}
         />
         <input
           name="password"
@@ -49,56 +48,11 @@ const Register = () => {
           value={form.password}
           onChange={handleChange}
           required
-          style={inputStyle}
         />
-        <button type="submit" style={buttonStyle}>Register</button>
+        <button type="submit">Register</button>
       </form>
     </div>
   );
-};
-
-const formContainer = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  height: "80vh",
-  backgroundColor: "#f4f4f4",
-};
-
-const formStyle = {
-  backgroundColor: "#fff",
-  padding: "40px",
-  borderRadius: "12px",
-  boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-  display: "flex",
-  flexDirection: "column",
-  width: "100%",
-  maxWidth: "400px",
-};
-
-const inputStyle = {
-  padding: "12px",
-  marginBottom: "20px",
-  borderRadius: "6px",
-  border: "1px solid #ccc",
-  fontSize: "16px",
-};
-
-const buttonStyle = {
-  padding: "12px",
-  backgroundColor: "#6200ea",
-  color: "#fff",
-  fontWeight: "bold",
-  border: "none",
-  borderRadius: "6px",
-  cursor: "pointer",
-  fontSize: "16px",
-};
-
-const formHeading = {
-  marginBottom: "20px",
-  textAlign: "center",
-  color: "#333",
 };
 
 export default Register;

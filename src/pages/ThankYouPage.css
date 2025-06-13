@@ -1,0 +1,80 @@
+/* src/pages/ThankYouPage.css */
+
+.thankyou-container {
+  text-align: center;
+  margin-top: 100px;
+  padding: 20px;
+  animation: fadeInUp 1s ease-out;
+}
+
+.thankyou-heading {
+  font-size: 32px;
+  color: #4CAF50;
+  animation: popIn 0.8s ease-out;
+}
+
+.thankyou-message {
+  font-size: 18px;
+  margin: 20px 0;
+  animation: fadeIn 1.2s ease-out;
+}
+
+.thankyou-button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  animation: fadeIn 1.5s ease-out;
+}
+
+.thankyou-button:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+body {
+  background: linear-gradient(270deg, #e3ffe7, #d9e7ff);
+  background-size: 400% 400%;
+  animation: animatedBackground 12s ease infinite;
+}
+
+@keyframes animatedBackground {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useCart } from "../context/CartContext";
 import { QRCodeCanvas } from "qrcode.react";
 import { useNavigate } from "react-router-dom";
+import './Cart.css';
 
 const Cart = () => {
   const {
@@ -103,171 +104,124 @@ const handleTransactionIdSubmit = async () => {
   };
 
   return (
-    <div style={{ padding: "30px" }}>
-      <h2>Your Cart</h2>
+    <div className="cart-container">
+  <h2>Your Cart</h2>
 
-      {cartItems.length === 0 ? (
-        <p>Your cart is empty.</p>
+  {cartItems.length === 0 ? (
+    <p>Your cart is empty.</p>
+  ) : (
+    <>
+      {!proceedToPayment ? (
+        <>
+          {cartItems.map((item) => (
+            <div key={item.id} className="cart-item">
+              <p className="cart-item-name">{item.name}</p>
+              <p className="cart-item-price">₹{item.price * item.quantity}</p>
+              <div className="cart-item-controls">
+                <button onClick={() => decreaseQuantity(item.id)}>-</button>
+                <span>{item.quantity}</span>
+                <button onClick={() => increaseQuantity(item.id)}>+</button>
+                <button
+                  onClick={() => removeFromCart(item.id)}
+                  className="remove-btn"
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
+          ))}
+
+          <h3 className="total-price">Total: ₹{total}</h3>
+
+          <button
+            onClick={() => setProceedToPayment(true)}
+            className="proceed-btn"
+          >
+            Proceed to Payment
+          </button>
+        </>
+      ) : !showUPI ? (
+        <>
+          <h3 className="total-price">Total: ₹{total}</h3>
+          <h4>Enter Your Details</h4>
+          <form onSubmit={handleFormSubmit}>
+            <input
+              type="text"
+              name="name"
+              placeholder="Your Name"
+              value={formData.name}
+              onChange={handleFormChange}
+              required
+              className="form-input"
+            />
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Phone Number"
+              value={formData.phone}
+              onChange={handleFormChange}
+              required
+              className="form-input"
+            />
+            <textarea
+              name="address"
+              placeholder="Delivery Address (Optional)"
+              value={formData.address}
+              onChange={handleFormChange}
+              rows={3}
+              className="form-textarea"
+            />
+            <button type="submit" className="continue-btn">
+              Continue to Pay
+            </button>
+          </form>
+        </>
       ) : (
         <>
-          {!proceedToPayment ? (
-            <>
-              {cartItems.map((item) => (
-                <div
-                  key={item.id}
-                  style={{
-                    borderBottom: "1px solid #ddd",
-                    marginBottom: "15px",
-                    paddingBottom: "10px",
-                  }}
-                >
-                  <p>
-                    <strong>{item.name}</strong>
-                  </p>
-                  <p>₹{item.price * item.quantity}</p>
-                  <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                    <button onClick={() => decreaseQuantity(item.id)}>-</button>
-                    <span>{item.quantity}</span>
-                    <button onClick={() => increaseQuantity(item.id)}>+</button>
-                    <button
-                      onClick={() => removeFromCart(item.id)}
-                      style={{ color: "red", marginLeft: "10px" }}
-                    >
-                      Remove
-                    </button>
-                  </div>
-                </div>
-              ))}
+          <h3 className="total-price">Total: ₹{total}</h3>
 
-              <h3>Total: ₹{total}</h3>
+          <button
+            onClick={handleUPIPayment}
+            className="pay-btn"
+          >
+            Pay with Google Pay / PhonePe
+          </button>
 
+          <div className="qr-section">
+            <h4>Or Scan to Pay</h4>
+            <QRCodeCanvas value={upiLink} size={180} />
+            <p>
+              UPI ID: <strong>nitinsatya656@oksbi</strong>
+            </p>
+          </div>
+
+          {!transactionSaved ? (
+            <div className="txn-form">
+              <h4>Enter Your UPI Transaction ID</h4>
+              <input
+                type="text"
+                value={transactionId}
+                onChange={(e) => setTransactionId(e.target.value)}
+                placeholder="e.g., 1234567890UPI"
+                className="form-input"
+              />
               <button
-                onClick={() => setProceedToPayment(true)}
-                style={{
-                  padding: "10px 20px",
-                  backgroundColor: "#4285F4",
-                  color: "white",
-                  border: "none",
-                  borderRadius: "6px",
-                  fontSize: "16px",
-                  cursor: "pointer",
-                  marginTop: "20px",
-                }}
+                onClick={handleTransactionIdSubmit}
+                className="submit-txn-btn"
               >
-                Proceed to Payment
+                Submit Transaction ID
               </button>
-            </>
-          ) : !showUPI ? (
-            <>
-              <h3>Total: ₹{total}</h3>
-              <h4>Enter Your Details</h4>
-              <form onSubmit={handleFormSubmit}>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Your Name"
-                  value={formData.name}
-                  onChange={handleFormChange}
-                  required
-                  style={{ display: "block", marginBottom: "10px", padding: "8px" }}
-                />
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="Phone Number"
-                  value={formData.phone}
-                  onChange={handleFormChange}
-                  required
-                  style={{ display: "block", marginBottom: "10px", padding: "8px" }}
-                />
-                <textarea
-                  name="address"
-                  placeholder="Delivery Address (Optional)"
-                  value={formData.address}
-                  onChange={handleFormChange}
-                  rows={3}
-                  style={{ display: "block", marginBottom: "10px", padding: "8px", width: "100%" }}
-                />
-                <button
-                  type="submit"
-                  style={{
-                    padding: "10px 20px",
-                    backgroundColor: "#34A853",
-                    color: "white",
-                    border: "none",
-                    borderRadius: "6px",
-                    fontSize: "16px",
-                    cursor: "pointer",
-                  }}
-                >
-                  Continue to Pay
-                </button>
-              </form>
-            </>
+            </div>
           ) : (
-            <>
-              <h3>Total: ₹{total}</h3>
-
-              <button
-                onClick={handleUPIPayment}
-                style={{
-                  padding: "10px 20px",
-                  backgroundColor: "#34A853",
-                  color: "white",
-                  border: "none",
-                  borderRadius: "6px",
-                  fontSize: "16px",
-                  cursor: "pointer",
-                  margin: "20px 0",
-                }}
-              >
-                Pay with Google Pay / PhonePe
-              </button>
-
-              <div>
-                <h4>Or Scan to Pay</h4>
-                <QRCodeCanvas value={upiLink} size={180} />
-                <p style={{ marginTop: "10px" }}>
-                  UPI ID: <strong>nitinsatya656@oksbi</strong>
-                </p>
-              </div>
-
-              {!transactionSaved ? (
-  <div style={{ marginTop: "20px" }}>
-    <h4>Enter Your UPI Transaction ID</h4>
-    <input
-      type="text"
-      value={transactionId}
-      onChange={(e) => setTransactionId(e.target.value)}
-      placeholder="e.g., 1234567890UPI"
-      style={{ padding: "8px", width: "100%", marginBottom: "10px" }}
-    />
-    <button
-      onClick={handleTransactionIdSubmit}
-      style={{
-        padding: "10px 20px",
-        backgroundColor: "#4285F4",
-        color: "white",
-        border: "none",
-        borderRadius: "6px",
-        fontSize: "16px",
-        cursor: "pointer",
-      }}
-    >
-      Submit Transaction ID
-    </button>
-  </div>
-) : (
-  <p style={{ color: "green", marginTop: "10px" }}>
-    Transaction ID submitted successfully. Thank you!
-  </p>
-)}
-
-            </>
+            <p className="success-msg">
+              Transaction ID submitted successfully. Thank you!
+            </p>
           )}
         </>
       )}
-    </div>
+    </>
+  )}
+</div>
   );
 };
 
