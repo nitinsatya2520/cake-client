@@ -14,10 +14,22 @@
   font-family: 'Segoe UI', sans-serif;
 }
 
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .navbar-logo {
-  font-size: 1.5rem;
+  height: 50px;
+  object-fit: contain;
+  border-radius: 25%;
+}
+
+.navbar-title {
+  font-size: 1.4rem;
   font-weight: bold;
-  letter-spacing: 1px;
+  color: white;
 }
 
 .navbar-links,
@@ -56,45 +68,51 @@
   color: #f78ca2;
 }
 
-.navbar-brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+/* Hamburger Menu Icon */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
 }
 
-.navbar-logo {
-  height: 50px;
-  object-fit: contain;
-  border-radius: 25%;
+.hamburger div {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  transition: 0.3s;
 }
 
-.navbar-title {
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: white;
-}
-
-
-
-/* Responsive */
+/* Responsive Design */
 @media (max-width: 768px) {
   .navbar {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-wrap: wrap;
     padding: 16px;
+  }
+
+  .hamburger {
+    display: flex;
+    margin-left: auto;
   }
 
   .navbar-links,
   .navbar-auth {
-    margin-top: 10px;
+    display: none;
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
+    margin-top: 10px;
+  }
+
+  .navbar-links.open,
+  .navbar-auth.open {
+    display: flex;
   }
 
   .navbar-link,
   .navbar-auth button {
     width: 100%;
     text-align: left;
+    padding-left: 0;
   }
 }
