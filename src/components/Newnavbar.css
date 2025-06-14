@@ -1,0 +1,127 @@
+/* FAB base styles */
+.fab {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  background-color: #db0e37; /* Updated */
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  font-size: 24px;
+  z-index: 1100;
+  cursor: pointer;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* FAB visible/hidden (same as before) */
+.fab-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.fab-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+}
+
+/* Show FAB only on small screens */
+@media (max-width: 600px) {
+  .fab {
+    display: flex;
+  }
+}
+
+/* Navbar base */
+.newnavbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  border-top: 1px solid #ddd;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+}
+
+/* Nav link wrapper */
+.newnavbar-links {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+/* Base nav link */
+.newnavbar-link {
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Icon */
+.newnavbar-link .icon {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+/* Hide labels on small screens */
+.label {
+  display: block;
+}
+@media (max-width: 600px) {
+  .label {
+    display: none;
+  }
+
+  .newnavbar-link .icon {
+    font-size: 24px;
+  }
+}
+
+/* Hover effect with theme color */
+.newnavbar-link:hover {
+  background-color: #db0e37;
+  color: white;
+}
+
+/* Active link highlighting with theme */
+.newnavbar-link.active {
+  background-color: #db0e37;
+  color: white;
+}
+
+
+.cart-badge-wrapper {
+  position: relative;
+  font-size: 20px;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background-color: #db0e37;
+  color: white;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-weight: bold;
+}

@@ -40,12 +40,7 @@ const Navbar = () => {
         <div></div>
       </div>
 
-      <div className={`navbar-links ${menuOpen ? "open" : ""}`}>
-        <Link to="/" className="navbar-link" onClick={() => setMenuOpen(false)}>Home</Link>
-        <Link to="/products" className="navbar-link" onClick={() => setMenuOpen(false)}>Products</Link>
-        <Link to="/cart" className="navbar-link" onClick={() => setMenuOpen(false)}>Cart</Link>
-        <Link to="/contact" className="navbar-link" onClick={() => setMenuOpen(false)}>Contact</Link>
-      </div>
+      
 
       <div className={`navbar-auth ${menuOpen ? "open" : ""}`}>
         {isLoggedIn ? (

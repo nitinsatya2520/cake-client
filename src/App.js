@@ -9,12 +9,14 @@ import Navbar from "./components/Navbar";
 import { CartProvider } from "./context/CartContext"; // ✅ Import your CartProvider
 import ThankYouPage from "./pages/ThankYouPage";
 import Contact from "./pages/Contact";
+import Newnavbar from "./components/Newnavbar";
 
 function App() {
   return (
     <CartProvider> {/* ✅ Wrap your entire app here */}
       <Router>
         <Navbar />
+        <Newnavbar /> 
         <Routes>
           <Route path="/products" element={<Products />} />
           <Route path="/" element={<Home />} />
