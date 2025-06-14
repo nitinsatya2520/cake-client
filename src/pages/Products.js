@@ -8,16 +8,20 @@ function Products() {
   const [search, setSearch] = useState("");
   const [sortOption, setSortOption] = useState("");
   const { addToCart } = useCart();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://cask-server.onrender.com/api/products")
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(data);
-        setFiltered(data);
-      })
-      .catch((err) => console.error("Error fetching products:", err));
-  }, []);
+  setLoading(true);
+  fetch("https://cask-server.onrender.com/api/products")
+    .then((res) => res.json())
+    .then((data) => {
+      setProducts(data);
+      setFiltered(data);
+    })
+    .catch((err) => console.error("Error fetching products:", err))
+    .finally(() => setLoading(false));
+}, []);
+
 
   useEffect(() => {
     let temp = [...products];
@@ -41,6 +45,14 @@ function Products() {
     setFiltered(temp);
   }, [search, sortOption, products]);
 
+  if (loading) {
+  return (
+    <div className="loading-container">
+      <div className="loader"></div>
+      <p>Loading products...</p>
+    </div>
+  );
+}
   return (
     <div className="products-container">
       <h2 className="products-title">🧁 Our Products</h2>
