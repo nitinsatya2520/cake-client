@@ -36,7 +36,8 @@ const Home = () => {
       {/* Product List */}
       <h2>🧁 Available Products</h2>
 <div className="carousel-wrapper">
-  <div className="carousel-track">
+ <div className="carousel-track auto-scroll">
+
     {products.map(product => (
       <div key={product.id} className="product-card-3d">
         <img src={product.image_url} alt={product.name} />
