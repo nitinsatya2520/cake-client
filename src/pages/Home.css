@@ -1,242 +1,375 @@
 /* Home.css */
 
-.home-container {
-  padding: 2rem;
-  font-family: "Segoe UI", sans-serif;
-  background: #fffaf7;
+:root {
+  --main-bg: #fff8f2;
+  --accent: #ff8c69;
+  --accent-dark: #e66b4d;
+  --text-primary: #4a2e2b;
+  --text-secondary: #775d57;
+  --card-bg: #ffffff;
+  --soft-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
 }
 
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background-color: var(--main-bg);
+}
+section {
+  margin-top: 60px;
+  animation: fadeIn 1s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+
+.home-container {
+  padding: 2rem;
+  background: var(--main-bg);
+}
+
+/* Header */
 .home-header {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  background: #fff0e5;
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  margin-bottom: 2rem;
-  box-shadow: 0 4px 8px rgba(255, 154, 118, 0.1);
+  justify-content: space-between;
+  gap: 1.5rem;
+  background: linear-gradient(to right, #fff0e5, #ffe4cc);
+  padding: 1.5rem 2.5rem;
+  border-radius: 18px;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 10px 20px rgba(255, 154, 118, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+.home-header::before {
+  content: "🧁";
+  font-size: 6rem;
+  position: absolute;
+  right: 30px;
+  top: -10px;
+  opacity: 0.05;
+  transform: rotate(-15deg);
+  pointer-events: none;
 }
 
 .logo {
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   object-fit: contain;
+  border-radius: 12px;
+  border: 2px solid #fff5ed;
+  box-shadow: 0 4px 8px rgba(255, 160, 122, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: rotate(-5deg) scale(1.05);
 }
 
 .header-text h1 {
-  font-size: 1.8rem;
+  font-size: 2.2rem;
   margin: 0;
   color: #d2691e;
+  font-weight: 800;
+  letter-spacing: 1px;
+  font-family: 'Segoe UI', sans-serif;
+  text-shadow: 1px 1px #ffe;
 }
 
 .header-text p {
-  font-size: 1rem;
-  color: #7a4e2d;
-  margin: 0.3rem 0 0;
-}
-
-.home-container h2 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  color: #d2691e;
-  text-align: center;
-}
-
-.product-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  justify-content: center;
-}
-
-.product-card {
-  background: #ffffff;
-  border: 1px solid #f2e3db;
-  box-shadow: 0 4px 8px rgba(210, 105, 30, 0.1);
-  border-radius: 12px;
-  padding: 1rem;
-  width: 220px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(210, 105, 30, 0.2);
-}
-
-.product-card img {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-.product-card h4 {
   font-size: 1.1rem;
-  margin: 0.5rem 0 0.2rem;
-  color: #333;
-}
-
-.product-card p {
-  font-size: 0.9rem;
-  color: #555;
-  margin: 0.2rem 0;
-}
-
-.product-card button {
-  background-color: #ff9a76;
-  color: #fff;
-  border: none;
-  padding: 8px 12px;
-  margin-top: 8px;
-  border-radius: 6px;
-  cursor: pointer;
+  color: #7a4e2d;
+  margin: 0.5rem 0 0;
   font-weight: 500;
-  transition: background-color 0.3s ease;
+  font-style: italic;
 }
 
-.product-card button:hover {
-  background-color: #ff7f50;
+/* Headings */
+h2 {
+  font-size: 2rem;
+  color: var(--accent-dark);
+  margin: 2rem 0 1rem;
+  text-align: center;
+  font-weight: 600;
+}
+h2:hover {
+  color: #ff7f50;
+  transform: scale(1.02);
+  transition: all 0.3s ease;
 }
 
-/* Mobile Responsive */
-@media (max-width: 768px) {
-  .product-grid {
-    flex-direction: column;
-    align-items: center;
+.bakery-info {
+  background: linear-gradient(135deg, #fff1e6 0%, #ffe8d4 100%);
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(255, 140, 100, 0.15);
+  margin: 40px 0;
+  transition: transform 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border-left: 6px solid #ff9a76;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease forwards;
+  animation-delay: 0.2s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-
-  .product-card {
-    width: 90%;
-  }
+}
+.bakery-info::before {
+  content: "🍞";
+  position: absolute;
+  font-size: 6rem;
+  top: -20px;
+  right: 20px;
+  opacity: 0.1;
+  transform: rotate(-15deg);
 }
 
+.bakery-info h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #d2691e;
+  font-weight: 700;
+  text-align: center;
+  position: relative;
+}
+
+.bakery-info h2::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: #ff9a76;
+  margin: 0.5rem auto 1.5rem;
+  border-radius: 10px;
+}
+
+.bakery-info p {
+  font-size: 1.05rem;
+  color: #5e4033;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+  text-align: justify;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* Carousel */
 .carousel-wrapper {
-  perspective: 1000px;
+  position: relative;
   overflow-x: auto;
   white-space: nowrap;
-  padding: 40px 0;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none;  /* IE 10+ */
-   -webkit-overflow-scrolling: touch;
+  padding: 30px 0;
   scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
 }
 .carousel-wrapper::-webkit-scrollbar {
-  display: none;  /* Chrome, Safari */
+  display: none;
 }
 
 .carousel-track {
   display: flex;
-  gap: 40px;
-  transform-style: preserve-3d;
-  padding: 20px;
-  transition: transform 0.5s ease;
-will-change: transform;
-
+  gap: 30px;
+  padding: 10px 20px;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
 }
 
+/* 3D Cards */
 .product-card-3d {
   flex: 0 0 250px;
-  background: #fff;
-  padding: 16px;
+  background: var(--card-bg);
   border-radius: 20px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-  transform: rotateY(5deg);
-  transition: transform 0.3s ease;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   scroll-snap-align: start;
+  text-align: center;
+  padding: 1rem;
 }
+
 .product-card-3d:hover {
-  transform: scale(1.05) rotateY(0deg);
+  transform: scale(1.05);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
 }
+
 .product-card-3d img {
   width: 100%;
-  height: 150px;
+  height: 160px;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 14px;
 }
+
 .product-card-3d h4 {
+  margin-top: 12px;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+.product-card-3d p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: 5px 0;
+}
+
+.product-card-3d button {
   margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #ff8c69;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(255, 140, 105, 0.3);
+  font-weight: bold;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+animation: scaleIn 0.5s ease forwards;
+  opacity: 0;
 }
 
-.bakery-info {
-  margin: 40px 0;
-  padding: 20px;
-  background: #fff3e6;
-  border-radius: 10px;
+@keyframes scaleIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-.bakery-info h2 {
-  color: #d2691e;
-  margin-bottom: 10px;
-}
-
-.bakery-info p {
-  font-size: 16px;
-  line-height: 1.6;
+.product-card-3d button:hover {
+  background-color: #e4574f;
+  box-shadow: 0 6px 14px rgba(255, 105, 90, 0.5);
+  transform: scale(1.05);
 }
 
 .testimonials {
-  margin-top: 50px;
-  padding: 20px;
-  background: #f0f8ff;
-  border-radius: 10px;
+  margin: 60px 0;
+  padding: 40px 30px;
+  background: linear-gradient(to right, #fef9f6, #fff4eb);
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(255, 160, 122, 0.1);
+  transition: all 0.3s ease-in-out;
 }
 
 .testimonials h2 {
-  margin-bottom: 20px;
-  color: #0077b6;
+  margin-bottom: 30px;
+  color: #d2691e;
+  font-size: 2rem;
+  text-align: center;
+  font-weight: 700;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 .testimonial-card {
-  background-color: white;
-  border-left: 4px solid #4CAF50;
-  padding: 15px;
-  margin-bottom: 15px;
-  border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to right, #fff, #fffdfb);
+  border-left: 6px solid #ffa07a;
+  padding: 20px 25px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(255, 178, 102, 0.12);
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+.testimonial-card::before {
+  content: "❝";
+  font-size: 3rem;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: #ff9a76;
+  opacity: 0.2;
+}
+
+.testimonial-card:hover {
+  transform: scale(1.02);
 }
 
 .testimonial-card p {
   font-style: italic;
-  margin-bottom: 10px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #5a3d2b;
+  margin: 0 0 12px;
 }
 
 .testimonial-card h5 {
   margin: 0;
   text-align: right;
-  font-weight: normal;
-  color: #555;
-}
-
-.product-card-3d h4 {
-  font-size: 1.2rem;
-  color: #333;
-  margin: 10px 0 5px;
+  color: #7a4e2d;
   font-weight: 600;
-  text-align: center;
 }
 
-.product-card-3d p {
-  font-size: 0.95rem;
-  color: #555;
-  margin: 4px 0;
-  text-align: center;
-}
 
-.product-card-3d button {
-  display: block;
-  margin: 12px auto 0;
-  padding: 8px 16px;
-  background-color: #ff6f61;
-  color: #fff;
+/* Scroll buttons */
+.scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #ffe0d6;
   border: none;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  font-weight: bold;
+  font-size: 2rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 50%;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  z-index: 10;
+  box-shadow: var(--soft-shadow);
+  transition: background-color 0.3s ease;
+}
+.scroll-btn:hover {
+  background-color: #ffd1c4;
 }
 
+.scroll-btn.left {
+  left: 10px;
+}
+
+.scroll-btn.right {
+  right: 10px;
+}
+
+@media (max-width: 768px) {
+  .scroll-btn {
+    display: none;
+  }
+
+  .product-card-3d {
+    width: 90%;
+  }
+  .home-header {
+  flex-direction: column;
+  text-align: center;
+  padding: 1.5rem 1rem;
+}
+
+.bakery-info, .testimonials {
+  padding: 30px 20px;
+}
+
+.carousel-track {
+  padding: 10px 10px;
+}
+
+.product-card-3d {
+  flex: 0 0 85%;
+}
+.carousel-track.auto-scroll {
+  animation: autoScroll 10s linear infinite;
+}
+
+}
 .product-card-3d button:hover {
   background-color: #e4574f;
   transform: scale(1.05);
@@ -248,5 +381,5 @@ will-change: transform;
 }
 
 .carousel-track.auto-scroll {
-  animation: autoScroll 20s linear infinite;
+  animation: autoScroll 30s linear infinite;
 }
